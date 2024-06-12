@@ -47,6 +47,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.txtOutput = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnCalculateCRC = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -208,11 +213,59 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "Currently working to get the current temperature of the chiller";
             // 
+            // txtInput
+            // 
+            this.txtInput.Location = new System.Drawing.Point(47, 314);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(236, 20);
+            this.txtInput.TabIndex = 19;
+            // 
+            // txtOutput
+            // 
+            this.txtOutput.Location = new System.Drawing.Point(47, 359);
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.ReadOnly = true;
+            this.txtOutput.Size = new System.Drawing.Size(236, 20);
+            this.txtOutput.TabIndex = 20;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(44, 293);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Command Input";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(44, 343);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "CRC Command";
+            // 
+            // btnCalculateCRC
+            // 
+            this.btnCalculateCRC.Location = new System.Drawing.Point(193, 288);
+            this.btnCalculateCRC.Name = "btnCalculateCRC";
+            this.btnCalculateCRC.Size = new System.Drawing.Size(90, 23);
+            this.btnCalculateCRC.TabIndex = 23;
+            this.btnCalculateCRC.Text = "Calculate CRC";
+            this.btnCalculateCRC.UseVisualStyleBackColor = true;
+            this.btnCalculateCRC.Click += new System.EventHandler(this.btnCalculateCRC_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 484);
+            this.Controls.Add(this.btnCalculateCRC);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtOutput);
+            this.Controls.Add(this.txtInput);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -258,6 +311,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtInput;
+        private System.Windows.Forms.TextBox txtOutput;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnCalculateCRC;
     }
 }
 
