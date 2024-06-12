@@ -139,7 +139,15 @@ namespace _2276OzoneGenerator
 
                 txtResponse.Text += $"\nTranslate: {finalValue.ToString()}";
             }
-        }     
+        }
+
+        string commandJerryASCII = "01 17 00 00 00 01 00 0B 00 01 02 01 2C AC";
+        string commandJerryRTU = "01 17 00 00 00 01 00 0B 00 01 02 01 2C 55 98";
+
+        private void btnSend30SP_Click(object sender, EventArgs e)
+        {
+            SendHexCommand(commandJerryRTU);
+        }
 
         private void btnSendHexW_Click(object sender, EventArgs e)
         {
@@ -187,5 +195,6 @@ namespace _2276OzoneGenerator
             return input.All(c => "0123456789ABCDEFabcdef".Contains(c));
         }
 
+       
     }
 }
