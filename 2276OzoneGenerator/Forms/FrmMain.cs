@@ -140,7 +140,7 @@ namespace _2276OzoneGenerator
 
                 double finalValue = decimalValue / 10.0;
 
-                txtResponse.Text += $"\nTranslate: {finalValue.ToString()}";
+                txtResponse.Text += "\n %%%%%%%%%%%%%%%%%%%%%" + $"\nCurrent Temperature: {finalValue.ToString()}";
             }
         }
 
@@ -225,7 +225,10 @@ namespace _2276OzoneGenerator
 
         private void btnSendSetpoint_Click(object sender, EventArgs e)
         {
-            SendHexCommand(CalculateCommandSendSetpoint());
+            lbStatus.ForeColor = Color.Red;
+            lbStatus.Text = "Running...";
+
+            CommandToSend = CalculateCommandSendSetpoint();
         }
 
         private string CalculateCommandSendSetpoint()
@@ -244,6 +247,42 @@ namespace _2276OzoneGenerator
 
                     // Add the constant values to the command to turn on the Chiller.
                     string WithoutCRC = InicioConstanteHexCommandSendSetpoint2 + hexValue + "0031";
+
+                    // Calculate the CRC for the RTU protocol.
+                    string CompleteCommandWithCRC = CalculateCRC(WithoutCRC);
+
+                    // Return the complete command by adding spaces every 2 characters to match the required format of the SendHexCommand function.
+                    return AddSpaceBetweenPairs(CompleteCommandWithCRC);
+                }
+                else
+                {
+                    MessageBox.Show("El valor del setpoint no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "";
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: \n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
+        }
+
+        private string CalculateCommandStop()
+        {
+            try
+            {
+                string setpointValue = txtSetpoint.Value.ToString("00.0");
+                string valueWithoutDot = setpointValue.Replace(".", "");
+
+                int decimalValue;
+
+                if (int.TryParse(valueWithoutDot, out decimalValue))
+                {
+                    // Convert the value from txt to HEX format 0X0000.
+                    string hexValue = decimalValue.ToString("X4");
+
+                    // Add the constant values to the command to turn on the Chiller.
+                    string WithoutCRC = InicioConstanteHexCommandSendSetpoint2 + hexValue + "0030";
 
                     // Calculate the CRC for the RTU protocol.
                     string CompleteCommandWithCRC = CalculateCRC(WithoutCRC);
@@ -285,6 +324,28 @@ namespace _2276OzoneGenerator
             }
 
             return result.Trim(); // Elimina el espacio final
+        }
+
+        private void btnStopCommand_Click(object sender, EventArgs e)
+        {
+            lbStatus.ForeColor = Color.Blue;
+            lbStatus.Text = "Not Running";
+            CommandToSend = CalculateCommandStop();
+        }
+
+        string CommandToSend = "";
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen) 
+            {
+                if (!string.IsNullOrEmpty(CommandToSend))
+                {
+                    SendHexCommand(CommandToSend);
+                }
+            }
+
+            lbDateTime.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
         }
     }
 }
