@@ -140,7 +140,7 @@ namespace _2276OzoneGenerator
 
                 double finalValue = decimalValue / 10.0;
 
-                txtResponse.Text += "\n %%%%%%%%%%%%%%%%%%%%%" + $"\nCurrent Temperature: {finalValue.ToString()}";
+                txtResponse.Text += $"\n\nCurrent Temperature: {finalValue.ToString()}";
             }
         }
 
