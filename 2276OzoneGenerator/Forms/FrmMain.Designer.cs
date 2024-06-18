@@ -40,9 +40,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnSendBitsW = new System.Windows.Forms.Button();
-            this.btnSendHexWL = new System.Windows.Forms.Button();
-            this.btnSendBitsWL = new System.Windows.Forms.Button();
             this.txtResponse = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,6 +50,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnCalculateCRC = new System.Windows.Forms.Button();
             this.btnCommand1 = new System.Windows.Forms.Button();
+            this.lbRange = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtSetpoint = new System.Windows.Forms.NumericUpDown();
+            this.btnSendSetpoint = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSetpoint)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -62,7 +64,7 @@
             // 
             // btnSendHexW
             // 
-            this.btnSendHexW.Location = new System.Drawing.Point(368, 148);
+            this.btnSendHexW.Location = new System.Drawing.Point(659, 63);
             this.btnSendHexW.Name = "btnSendHexW";
             this.btnSendHexW.Size = new System.Drawing.Size(114, 23);
             this.btnSendHexW.TabIndex = 0;
@@ -152,36 +154,9 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Data Bits: 8";
             // 
-            // btnSendBitsW
-            // 
-            this.btnSendBitsW.Location = new System.Drawing.Point(825, 10);
-            this.btnSendBitsW.Name = "btnSendBitsW";
-            this.btnSendBitsW.Size = new System.Drawing.Size(114, 23);
-            this.btnSendBitsW.TabIndex = 10;
-            this.btnSendBitsW.Text = "Send Bits Write";
-            this.btnSendBitsW.UseVisualStyleBackColor = true;
-            // 
-            // btnSendHexWL
-            // 
-            this.btnSendHexWL.Location = new System.Drawing.Point(825, 42);
-            this.btnSendHexWL.Name = "btnSendHexWL";
-            this.btnSendHexWL.Size = new System.Drawing.Size(114, 23);
-            this.btnSendHexWL.TabIndex = 11;
-            this.btnSendHexWL.Text = "Send Hex WriteLine";
-            this.btnSendHexWL.UseVisualStyleBackColor = true;
-            // 
-            // btnSendBitsWL
-            // 
-            this.btnSendBitsWL.Location = new System.Drawing.Point(825, 72);
-            this.btnSendBitsWL.Name = "btnSendBitsWL";
-            this.btnSendBitsWL.Size = new System.Drawing.Size(114, 23);
-            this.btnSendBitsWL.TabIndex = 12;
-            this.btnSendBitsWL.Text = "Send Bits WriteLine";
-            this.btnSendBitsWL.UseVisualStyleBackColor = true;
-            // 
             // txtResponse
             // 
-            this.txtResponse.Location = new System.Drawing.Point(368, 209);
+            this.txtResponse.Location = new System.Drawing.Point(517, 330);
             this.txtResponse.Name = "txtResponse";
             this.txtResponse.Size = new System.Drawing.Size(422, 142);
             this.txtResponse.TabIndex = 14;
@@ -190,7 +165,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(365, 183);
+            this.label7.Location = new System.Drawing.Point(514, 314);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 15;
@@ -208,7 +183,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(365, 132);
+            this.label9.Location = new System.Drawing.Point(656, 47);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(291, 13);
             this.label9.TabIndex = 18;
@@ -216,14 +191,14 @@
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(47, 314);
+            this.txtInput.Location = new System.Drawing.Point(10, 411);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(236, 20);
             this.txtInput.TabIndex = 19;
             // 
             // txtOutput
             // 
-            this.txtOutput.Location = new System.Drawing.Point(47, 359);
+            this.txtOutput.Location = new System.Drawing.Point(10, 456);
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ReadOnly = true;
             this.txtOutput.Size = new System.Drawing.Size(236, 20);
@@ -232,7 +207,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(44, 293);
+            this.label10.Location = new System.Drawing.Point(7, 390);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(81, 13);
             this.label10.TabIndex = 21;
@@ -241,7 +216,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(44, 343);
+            this.label11.Location = new System.Drawing.Point(7, 440);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 22;
@@ -249,7 +224,7 @@
             // 
             // btnCalculateCRC
             // 
-            this.btnCalculateCRC.Location = new System.Drawing.Point(193, 288);
+            this.btnCalculateCRC.Location = new System.Drawing.Point(156, 385);
             this.btnCalculateCRC.Name = "btnCalculateCRC";
             this.btnCalculateCRC.Size = new System.Drawing.Size(90, 23);
             this.btnCalculateCRC.TabIndex = 23;
@@ -259,7 +234,7 @@
             // 
             // btnCommand1
             // 
-            this.btnCommand1.Location = new System.Drawing.Point(368, 72);
+            this.btnCommand1.Location = new System.Drawing.Point(659, 5);
             this.btnCommand1.Name = "btnCommand1";
             this.btnCommand1.Size = new System.Drawing.Size(263, 23);
             this.btnCommand1.TabIndex = 24;
@@ -267,11 +242,62 @@
             this.btnCommand1.UseVisualStyleBackColor = true;
             this.btnCommand1.Click += new System.EventHandler(this.btnCommand1_Click);
             // 
+            // lbRange
+            // 
+            this.lbRange.AutoSize = true;
+            this.lbRange.Location = new System.Drawing.Point(229, 118);
+            this.lbRange.Name = "lbRange";
+            this.lbRange.Size = new System.Drawing.Size(110, 13);
+            this.lbRange.TabIndex = 25;
+            this.lbRange.Text = "Range SP 18.0 - 22.0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(9, 362);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(79, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "CRC Calculator";
+            // 
+            // txtSetpoint
+            // 
+            this.txtSetpoint.DecimalPlaces = 1;
+            this.txtSetpoint.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtSetpoint.Location = new System.Drawing.Point(232, 134);
+            this.txtSetpoint.Name = "txtSetpoint";
+            this.txtSetpoint.Size = new System.Drawing.Size(156, 20);
+            this.txtSetpoint.TabIndex = 27;
+            this.txtSetpoint.Value = new decimal(new int[] {
+            181,
+            0,
+            0,
+            65536});
+            this.txtSetpoint.ValueChanged += new System.EventHandler(this.txtSetpoint_ValueChanged);
+            // 
+            // btnSendSetpoint
+            // 
+            this.btnSendSetpoint.Location = new System.Drawing.Point(232, 161);
+            this.btnSendSetpoint.Name = "btnSendSetpoint";
+            this.btnSendSetpoint.Size = new System.Drawing.Size(156, 23);
+            this.btnSendSetpoint.TabIndex = 28;
+            this.btnSendSetpoint.Text = "Send Setpoint && Run Chiller";
+            this.btnSendSetpoint.UseVisualStyleBackColor = true;
+            this.btnSendSetpoint.Click += new System.EventHandler(this.btnSendSetpoint_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 484);
+            this.Controls.Add(this.btnSendSetpoint);
+            this.Controls.Add(this.txtSetpoint);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lbRange);
             this.Controls.Add(this.btnCommand1);
             this.Controls.Add(this.btnCalculateCRC);
             this.Controls.Add(this.label11);
@@ -282,9 +308,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtResponse);
-            this.Controls.Add(this.btnSendBitsWL);
-            this.Controls.Add(this.btnSendHexWL);
-            this.Controls.Add(this.btnSendBitsW);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -296,8 +319,10 @@
             this.Controls.Add(this.cbCOM);
             this.Controls.Add(this.btnSendHexW);
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmMain";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.txtSetpoint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,9 +341,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnSendBitsW;
-        private System.Windows.Forms.Button btnSendHexWL;
-        private System.Windows.Forms.Button btnSendBitsWL;
         private System.Windows.Forms.RichTextBox txtResponse;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -329,6 +351,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnCalculateCRC;
         private System.Windows.Forms.Button btnCommand1;
+        private System.Windows.Forms.Label lbRange;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown txtSetpoint;
+        private System.Windows.Forms.Button btnSendSetpoint;
     }
 }
 

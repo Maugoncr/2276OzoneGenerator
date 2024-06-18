@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +23,7 @@ namespace _2276OzoneGenerator
         private void FrmMain_Load(object sender, EventArgs e)
         {
             cbCOM.Items.AddRange(SerialPort.GetPortNames());
+            InitializeNumericUpDown();
         }
 
 
@@ -66,7 +69,7 @@ namespace _2276OzoneGenerator
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-           ConnectToSerialPort(cbCOM.SelectedItem.ToString());
+            ConnectToSerialPort(cbCOM.SelectedItem.ToString());
         }
 
         private void ConnectToSerialPort(string portName)
@@ -172,7 +175,7 @@ namespace _2276OzoneGenerator
             }
             else
             {
-                MessageBox.Show("The input is not a valid hexadecimal string.Please enter only hexadecimal characters(0 - 9, A - F).", "Invalid Input", 
+                MessageBox.Show("The input is not a valid hexadecimal string.Please enter only hexadecimal characters(0 - 9, A - F).", "Invalid Input",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -187,10 +190,101 @@ namespace _2276OzoneGenerator
             return input.All(c => "0123456789ABCDEFabcdef".Contains(c));
         }
 
+        // Working correctly
+
         string RequestTemp_SetSP_RunChiller = "01 17 00 00 00 01 00 0B 00 02 04 01 2C 00 31 77 1D";
         private void btnCommand1_Click(object sender, EventArgs e)
         {
             SendHexCommand(RequestTemp_SetSP_RunChiller);
+        }
+
+        private void InitializeNumericUpDown()
+        {
+            txtSetpoint.Minimum = 18.0M;  // Configura el valor mínimo
+            txtSetpoint.Maximum = 22.0M;  // Configura el valor máximo
+            lastValidValue = txtSetpoint.Value;  // Guarda el valor inicial
+        }
+
+        private decimal lastValidValue;
+
+        private void txtSetpoint_ValueChanged(object sender, EventArgs e)
+        {
+            if (txtSetpoint.Value < 18.0M || txtSetpoint.Value > 22.0M)
+            {
+                MessageBox.Show("El valor debe estar entre 18.0 y 22.0", "Valor fuera de rango", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSetpoint.Value = lastValidValue;  // Restaura el último valor válido
+            }
+            else
+            {
+                lastValidValue = txtSetpoint.Value;  // Actualiza el último valor válido
+            }
+        }
+
+        string InicioConstanteHexCommandSendSetpoint = "01 17 00 00 00 01 00 0B 00 02 04";
+        string InicioConstanteHexCommandSendSetpoint2 = "011700000001000B000204";
+
+        private void btnSendSetpoint_Click(object sender, EventArgs e)
+        {
+            SendHexCommand(CalculateCommandSendSetpoint());
+        }
+
+        private string CalculateCommandSendSetpoint()
+        {
+            try
+            {
+                string setpointValue = txtSetpoint.Value.ToString("00.0");
+                string valueWithoutDot = setpointValue.Replace(".", "");
+
+                int decimalValue;
+
+                if (int.TryParse(valueWithoutDot, out decimalValue))
+                {
+                    // Convert the value from txt to HEX format 0X0000.
+                    string hexValue = decimalValue.ToString("X4");
+
+                    // Add the constant values to the command to turn on the Chiller.
+                    string WithoutCRC = InicioConstanteHexCommandSendSetpoint2 + hexValue + "0031";
+
+                    // Calculate the CRC for the RTU protocol.
+                    string CompleteCommandWithCRC = CalculateCRC(WithoutCRC);
+
+                    // Return the complete command by adding spaces every 2 characters to match the required format of the SendHexCommand function.
+                    return AddSpaceBetweenPairs(CompleteCommandWithCRC);
+                }
+                else
+                {
+                    MessageBox.Show("El valor del setpoint no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "";
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: \n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
+        }
+
+        private string AddSpaceBetweenPairs(string input)
+        {
+            if (string.IsNullOrEmpty(input) || input.Length < 2)
+            {
+                return input; // Retorna el input original si es nulo o tiene menos de 2 caracteres
+            }
+
+            string result = string.Empty;
+            for (int i = 0; i < input.Length; i += 2)
+            {
+                if (i + 2 <= input.Length)
+                {
+                    result += input.Substring(i, 2) + " ";
+                }
+                else
+                {
+                    result += input.Substring(i);
+                }
+            }
+
+            return result.Trim(); // Elimina el espacio final
         }
     }
 }
