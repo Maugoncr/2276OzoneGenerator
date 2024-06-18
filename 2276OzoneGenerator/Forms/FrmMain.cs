@@ -83,7 +83,7 @@ namespace _2276OzoneGenerator
             serialPort1.StopBits = StopBits.One;
             serialPort1.DataBits = 8;
             serialPort1.Handshake = Handshake.None;
-            //serialPort1.ReceivedBytesThreshold = 25;
+            serialPort1.ReceivedBytesThreshold = 14;
 
             try
             {
@@ -117,7 +117,7 @@ namespace _2276OzoneGenerator
 
             response = receivedData;
 
-            //ShowResponse();
+            ShowResponse();
         }
 
         private void ShowResponse()
