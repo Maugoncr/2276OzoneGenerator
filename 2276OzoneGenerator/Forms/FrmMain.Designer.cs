@@ -52,7 +52,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btnCalculateCRC = new System.Windows.Forms.Button();
-            this.btnSend30SP = new System.Windows.Forms.Button();
+            this.btnCommand1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -257,22 +257,22 @@
             this.btnCalculateCRC.UseVisualStyleBackColor = true;
             this.btnCalculateCRC.Click += new System.EventHandler(this.btnCalculateCRC_Click);
             // 
-            // btnSend30SP
+            // btnCommand1
             // 
-            this.btnSend30SP.Location = new System.Drawing.Point(368, 90);
-            this.btnSend30SP.Name = "btnSend30SP";
-            this.btnSend30SP.Size = new System.Drawing.Size(75, 23);
-            this.btnSend30SP.TabIndex = 24;
-            this.btnSend30SP.Text = "Send 30 SP";
-            this.btnSend30SP.UseVisualStyleBackColor = true;
-            this.btnSend30SP.Click += new System.EventHandler(this.btnSend30SP_Click);
+            this.btnCommand1.Location = new System.Drawing.Point(368, 72);
+            this.btnCommand1.Name = "btnCommand1";
+            this.btnCommand1.Size = new System.Drawing.Size(263, 23);
+            this.btnCommand1.TabIndex = 24;
+            this.btnCommand1.Text = "Request Current Temp, Set SP 30.0 and Run Chiller";
+            this.btnCommand1.UseVisualStyleBackColor = true;
+            this.btnCommand1.Click += new System.EventHandler(this.btnCommand1_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 484);
-            this.Controls.Add(this.btnSend30SP);
+            this.Controls.Add(this.btnCommand1);
             this.Controls.Add(this.btnCalculateCRC);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -328,7 +328,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnCalculateCRC;
-        private System.Windows.Forms.Button btnSend30SP;
+        private System.Windows.Forms.Button btnCommand1;
     }
 }
 

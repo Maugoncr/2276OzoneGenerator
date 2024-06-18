@@ -80,7 +80,7 @@ namespace _2276OzoneGenerator
             serialPort1.StopBits = StopBits.One;
             serialPort1.DataBits = 8;
             serialPort1.Handshake = Handshake.None;
-            serialPort1.ReceivedBytesThreshold = 25;
+            //serialPort1.ReceivedBytesThreshold = 25;
 
             try
             {
@@ -114,7 +114,7 @@ namespace _2276OzoneGenerator
 
             response = receivedData;
 
-            ShowResponse();
+            //ShowResponse();
         }
 
         private void ShowResponse()
@@ -141,20 +141,12 @@ namespace _2276OzoneGenerator
             }
         }
 
-        string commandJerryASCII = "01 17 00 00 00 01 00 0B 00 01 02 01 2C AC";
-        string commandJerryRTU = "01 17 00 00 00 01 00 0B 00 01 02 01 2C 55 98";
-
-        private void btnSend30SP_Click(object sender, EventArgs e)
-        {
-            SendHexCommand(commandJerryRTU);
-        }
 
         private void btnSendHexW_Click(object sender, EventArgs e)
         {
             SendHexCommand(commandHexDevice);
         }
 
-        string commandHexModPoll = "01 04 00 00 00 00 01 31 CA";
         string commandHexDevice = "01 03 00 00 00 0A C5 CD";
 
         private void SendHexCommand(string hexCommand)
@@ -195,6 +187,10 @@ namespace _2276OzoneGenerator
             return input.All(c => "0123456789ABCDEFabcdef".Contains(c));
         }
 
-       
+        string RequestTemp_SetSP_RunChiller = "01 17 00 00 00 01 00 0B 00 02 04 01 2C 00 31 77 1D";
+        private void btnCommand1_Click(object sender, EventArgs e)
+        {
+            SendHexCommand(RequestTemp_SetSP_RunChiller);
+        }
     }
 }
